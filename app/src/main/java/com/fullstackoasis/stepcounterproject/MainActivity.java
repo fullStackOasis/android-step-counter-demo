@@ -6,6 +6,7 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -15,9 +16,11 @@ import android.widget.TextView;
  * to see how many steps the person holding the device has taken during a specific period of time.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private String TAG = MainActivity.class.getCanonicalName();
     private SensorManager sensorManager;
     private Sensor sensor;
     private boolean isCounting;
+    private int counter = 0; // TODO FIXME store data
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cb.setOnClickListener(this);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        Log.d(TAG, "Sensor is null? " + (sensor == null));
     }
 
     private void toggleCountingSteps() {
