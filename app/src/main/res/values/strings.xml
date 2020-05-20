@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">StepCounterProject</string>
+    <string name="checked_string">Counting Steps</string>
+    <string name="unchecked_string"><b>NOT</b> Counting Steps</string>
+</resources>
