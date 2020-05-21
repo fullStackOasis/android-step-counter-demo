@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">StepCounterProject</string>
-    <string name="checked_string">Counting Steps</string>
-    <string name="unchecked_string"><b>NOT</b> Counting Steps</string>
+    <string name="stepping_message">You have taken %d steps</string>
+    <string name="not_stepping_message">You are <b>NOT</b> stepping</string>
+    <string name="empty"></string>
+    <string name="cb_instruction">Check to count your steps. Uncheck to stop counting.</string>
+    <string name="checked_string">Counting Steps right now</string>
+    <string name="unchecked_string"><b>NOT</b> Counting Steps right now</string>
+    <string name="step_counter_service_label">step counter service</string>
+    <string name="btn_instruction">Press button to reset step counter (restart from 0
+        steps)</string>
+    <string name="reset_step_counter">delete steps</string>
 </resources>
