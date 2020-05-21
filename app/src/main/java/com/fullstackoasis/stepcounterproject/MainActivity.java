@@ -46,10 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resetSensor();
         counter = dataStorage.getStepsFromSharedPreferences();
         nStepsToSubtract = dataStorage.getNStepsToSubtractFromSharedPreferences();
-        int nSteps = counter;
-        if (counter > nStepsToSubtract) {
-            nSteps = nSteps - nStepsToSubtract;
-        }
+        toggleCountingSteps();
+        int nSteps = getStepsToDisplay();
         setStepCounterText(nSteps);
     }
 
@@ -58,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         registerStepListener();
         nStepsToSubtract = dataStorage.getNStepsToSubtractFromSharedPreferences();
+        counter = dataStorage.getStepsFromSharedPreferences();
     }
 
     @Override
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // DELETE button, because the step counter sensor maintains the count independently of
         // this app running.
         dataStorage.setStepsToSharedPreferences(counter);
+        dataStorage.setNStepsToSubtractFromSharedPreferences(nStepsToSubtract);
     }
 
     private void registerStepListener() {
@@ -162,11 +162,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // See https://developer.android.com/reference/android/hardware/Sensor#TYPE_STEP_COUNTER
         counter = (int)event.values[0]; // This is the source of truth for number of steps taken
         // since reboot
+        int nSteps = getStepsToDisplay();
+        setStepCounterText(nSteps);
+    }
+
+    private int getStepsToDisplay() {
         int nSteps = counter;
-        if (counter > nStepsToSubtract) {
+        if (counter >= nStepsToSubtract) {
             nSteps = nSteps - nStepsToSubtract;
         }
-        setStepCounterText(nSteps);
+        return nSteps;
     }
 
     @Override
